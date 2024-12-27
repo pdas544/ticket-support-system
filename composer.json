@@ -1,0 +1,8 @@
+{
+    "name": "pdas544/ticket",
+    "require": {
+        "ext-gd": "*",
+        "ext-zip": "*",
+        "phpoffice/phpspreadsheet": "^3.6"
+    }
+}

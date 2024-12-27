@@ -1,0 +1,100 @@
+CREATE DATABASE ticketing_support;
+
+USE ticketing_support;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    agent_id INT,
+    subject VARCHAR(255),
+    description TEXT,
+    status ENUM('open', 'in_progress', 'resolved') DEFAULT 'open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fkuserid FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fkagentid FOREIGN KEY (agent_id) REFERENCES agents(id)
+);
+
+CREATE TABLE agents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name varchar(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+);
+
+--dummy ticket details
+
+INSERT INTO `tickets` (`id`, `user_id`, `agent_id`, `subject`, `description`, `status`, `created_at`) VALUES (NULL, '3', '1', 'test subject', 'test description', 'open', current_timestamp());
+
+---mail configuration for xampp
+Sending mail using XAMPP server
+
+I encountered numerous issues while attempting to send emails using the XAMPP server. However, I eventually found the correct method to accomplish it.
+
+Configuring PHP's mail functionality to work with Gmail's SMTP server involves editing the `php.ini` and `sendmail.ini` configuration files. Below are the formal steps for setting up PHP to send emails through Gmail's SMTP server using XAMPP:
+
+Configuring php.ini:
+
+1. Open `php.ini` in an editor:
+   Open the `php.ini` configuration file in your preferred text editor.
+
+2. Locate the mail function:
+   Use the search function (Ctrl + F) to find the section related to the mail function within the `php.ini` file.
+
+3. Update mail function settings:
+   Copy and paste the following configuration parameters into the mail function section. Comment out or disable all other settings related to mail.
+
+   php.ini code to be edited:
+
+   SMTP=smtp.gmail.com
+   smtp_port=587
+   sendmail_from = yourmail@gmail.com
+   sendmail_path = write_sendmail.exe_path
+   
+
+4. Save the changes:
+   Save the `php.ini` file after applying the modifications.
+
+Configuring sendmail.ini (in XAMPP folder):
+
+1. Open `sendmail.ini` in XAMPP folder:
+   Locate and open the `sendmail.ini` configuration file within the XAMPP directory.
+
+2. Adjust SMTP settings:
+   Insert the following content into the `sendmail.ini` file, marking other configurations as comments:
+
+   sendmail.ini code :
+
+   smtp_server=smtp.gmail.com
+   smtp_port=587
+   error_logfile=error.log
+   debug_logfile=debug.log
+   auth_username=yourmail@gmail.com
+auth_password=app_password_after_enabling_two_factor_authentication_for_your_mail_id
+   force_sender=priyansh.kala.4@gmail.com
+   
+
+3. Save the changes:
+   Save the `sendmail.ini` file after inserting the specified configurations.
+
+These steps configure PHP to utilize Gmail's SMTP server for sending emails. Ensure that the modifications are saved and that the necessary XAMPP services are restarted for the changes to take effect.
+
+Please note that using hardcoded passwords in configuration files poses a security risk. Storing passwords directly in plain text files should be avoided in production environments. Consider using environment variables or secure credential management systems for better security practices.
+
+Code for sending mail-:
+
+<?php
+$subject = "Mail for checking";
+$msg = "Hey! Let us play with PHP.";
+$receiver = "reciever@gmail.com";
+mail($receiver, $subject, $msg);
+?>
+
+---
+
