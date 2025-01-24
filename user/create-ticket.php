@@ -59,31 +59,47 @@ $result = $stmt->get_result();
 
     <div class="container mt-5">
         <div class="login-container">
-            <h2>Raise Ticket</h2>
+            <h2 class="text-center">Raise Ticket</h2>
             <form action="controller/ticket.php" method="post">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" required
+                        placeholder="Enter your Name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" required
+                        placeholder="Enter your official email id">
                 </div>
                 <div class="form-group">
                     <label for="department">Department</label>
-                    <input type="text" class="form-control" id="department" name="department" required>
+                    <select name="" id="" class="form-select" aria-label="Default select example">
+                        <option value="" selected disabled>--Select Department--</option>
+                        <option value="fc">Fashion Communication</option>
+                        <option value="ft">Fashion Technology</option>
+                        <option value="fd">Fashion Design</option>
+                        <option value="fla">Fashion and LifeStyle Accessories</option>
+                        <option value="td">Textile Design</option>
+                        <option value="fm">Fashion Management</option>
+                        <option value="et">Establishment</option>
+                        <option value="ac">Accounts</option>
+                        <option value="ad">Administration</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
-                    <input type="text" class="form-control" id="location" name="location" required>
+                    <input type="text" class="form-control" id="location" name="location" required
+                        placeholder="Enter Issue location (classroom/lab/etc)">
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" name="subject" required>
+                    <input type="text" class="form-control" id="subject" name="subject" required
+                        placeholder="Enter brief subject">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="3" required
+                        placeholder="Enter brief description"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
