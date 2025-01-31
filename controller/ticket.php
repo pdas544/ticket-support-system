@@ -17,13 +17,13 @@ class Ticket {
     }
 
     public function create($user_id, $name, $email, $subject, $description) {
-        // Insert user's name and email into the users table
+        // Insert user's name and email into the guest_users table
         $stmt = $this->db->prepare("INSERT INTO guest_users (name, email) VALUES (?, ?)");
         $stmt->bind_param("ss", $name, $email);
         $stmt->execute();
         $user_id = $stmt->insert_id;
 
-        // Insert ticket details into the tickets table
+        // Insert ticket details into the guest_tickets table
         
         try{
         $stmt = $this->db->prepare("INSERT INTO guest_tickets (user_id,subject, description) VALUES (?, ?, ?)");
@@ -31,7 +31,7 @@ class Ticket {
         $stmt->execute();
         }
         catch(Exception $e){
-            die("Error in Query: " . $e->getMessage());
+            die("Cannot Insert Record for guests. ");
         }
 
         $ticket_id = $stmt->insert_id;

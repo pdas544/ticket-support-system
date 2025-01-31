@@ -1,5 +1,5 @@
 <?php
-$db = new mysqli("localhost", "root", "root@123", "ticketing_support");
+$db = new mysqli("localhost", "root", "Root@123", "ticketing_support");
 
 
 try{

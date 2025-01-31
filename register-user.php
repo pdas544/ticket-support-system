@@ -120,7 +120,7 @@
       $("#passwordHelp").hide();
     });
     $("#password").on("focus", function () {
-      $("#passwordHelp").css("display", "inline").slideUp(3000);
+      $("#passwordHelp").css("display", "inline");    //display static message
     });
 
     (function () {
