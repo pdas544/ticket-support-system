@@ -39,8 +39,8 @@ class ComposerStaticInite51ee00e0994cef6afc38d8136ce1398
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -61,7 +61,10 @@ class ComposerStaticInite51ee00e0994cef6afc38d8136ce1398
     );
 
     public static $classMap = array (
+        'Auth' => __DIR__ . '/../..' . '/app/controller/amc-login.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Ticket' => __DIR__ . '/../..' . '/app/controller/ticket.php',
+        'User' => __DIR__ . '/../..' . '/app/controller/user.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

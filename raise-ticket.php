@@ -1,3 +1,44 @@
+<?php
+
+
+require_once '../ticket/includes/initialize.php';
+
+// die(SITE_ROOT);
+
+require_once CONTROLLER_PATH.DS.'ticket.php';
+
+require_once SITE_ROOT."\\db.php";
+
+// var_dump($db);
+
+// die();
+
+
+if(isset($_GET['guest'])){
+    $_SESSION['is_guest'] = $_GET['guest'];
+    // die($_SESSION['is_guest']);
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    // var_dump($_POST);
+    // die();
+    $name = htmlspecialchars($_POST['name']);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $subject = htmlspecialchars($_POST['subject']);
+    $description = htmlspecialchars($_POST['description']);
+    $ticket = new Ticket($db);
+    
+    if($ticket->insertGuestTicket($name,$email,$subject,$description)==true){
+        // die("success");
+        header("Location: raise-ticket.php?createTicket=true&ticket_id=".$_SESSION['ticket_id']);
+        exit();
+    }else{
+        header("Location: raise-ticket.php?createTicket=false");
+        exit();
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +59,7 @@
     <div class="container-fluid">
         <div class="raise-ticket-container">
             <h2 class="mb-4 text-center">Raise Ticket</h2>
-            <form action="controller/ticket.php" method="post" class="needs-validation" novalidate>
+            <form action="#" method="post" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -94,7 +135,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        // JavaScript for disabling form submissions if there are invalid fields
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -116,12 +157,17 @@
         // Check for success message in URL and display modal if present
         $(document).ready(function () {
             var urlParams = new URLSearchParams(window.location.search);
-            var success = urlParams.get('success');
+            var createTicketMsg = urlParams.get('createTicket');
             var ticketId = urlParams.get('ticket_id');
-            if (success === 'true') {
+            if (createTicketMsg === 'true') {
                 $('#messageText').text('Ticket raised successfully. Your ticket ID is: ' + ticketId);
                 $('#messageModal').modal('show');
             }
+            if (createTicketMsg === 'false') {
+                $('#messageText').text('Ticket Creation Failed.');
+                $('#messageModal').modal('show');
+            }
+
         });
     </script>
 </body>

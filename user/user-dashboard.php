@@ -49,7 +49,7 @@ $totalTickets = $totalTicketsRow['total'];
                     <span class="nav-link"><strong>Welcome, <?php echo $_SESSION['user_name'] ?? ""; ?></strong></span>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="logout.php">Dashboard</a>
+                    <a class="nav-link" href="user-dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="create-ticket.php">Create Ticket</a>

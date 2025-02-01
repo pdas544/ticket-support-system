@@ -1,3 +1,30 @@
+<?php
+session_start();
+// require './bootstrap.php';
+require_once 'db.php';
+require_once 'controller/user.php';
+
+$user = new User($db);
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  // Sanitize and validate input
+  $name = htmlspecialchars($_POST['name']);
+  $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  $password = md5($_POST['password']);
+
+  if($user->register($name, $email, $password)==true) {
+    header("Location: register-user.php?register=true");
+    exit();
+  }else{
+    header("Location: register-user.php?register=false");
+    exit();
+  }
+
+  // die("register page died");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +57,7 @@
   <div class="container-fluid">
     <div class="register-container">
       <h2 class="mb-4 text-center">Register</h2>
-      <form action="controller/register.php" method="post" class="needs-validation" novalidate>
+      <form action="register-user.php" method="post" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" class="form-control" id="name" name="name" required />
@@ -120,7 +147,7 @@
       $("#passwordHelp").hide();
     });
     $("#password").on("focus", function () {
-      $("#passwordHelp").css("display", "inline");    //display static message
+      $("#passwordHelp").css("display", "inline"); //display static message
     });
 
     (function () {
@@ -189,16 +216,21 @@
     // Check for message in URL and display modal if present
     $(document).ready(function () {
       var urlParams = new URLSearchParams(window.location.search);
-      var
-        errorMessage = urlParams.get("error");
-      var successMessage = urlParams.get("success");
+      var errorMessage = urlParams.get("error");
+      var registerMessage = urlParams.get("register");
       if (errorMessage === "email_exists") {
         $("#messageText").text("Email already exists, Kindly Sign-In.");
         $("#messageModal").modal("show");
-      } else if (successMessage === "true") {
+      }
+      if (registerMessage === "true") {
         $("#messageText").text("Registered successfully.");
         $("#messageModal").modal("show");
       }
+      if (registerMessage === "false") {
+        $("#messageText").text("Registration Failed. Kindly, try again!");
+        $("#messageModal").modal("show");
+      }
+
     });
 
     // Password validation function

@@ -1,3 +1,13 @@
+<?php
+session_start();
+$_SESSION['table']="users";
+if(isset($_GET['amc-login'])){
+  // die($_GET['amc-login']);
+  $table = $_GET['amc-login']=='true'?'agents':'users';
+  $_SESSION['table'] = $table;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +29,7 @@
   <div class="container-mt-5">
     <div class="login-container">
       <h2 class="mb-4 text-center">Login</h2>
-      <form action="controller/login.php" method="post" class="needs-validation" novalidate>
+      <form action="controller/auth.php" method="post" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" class="form-control" id="email" name="email" required />

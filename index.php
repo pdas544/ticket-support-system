@@ -1,5 +1,6 @@
 <?php
 
+// include("includes/initialize.php");
 require_once 'db.php';
 
 function getTotalTickets() {
@@ -63,6 +64,7 @@ function getResolvedTickets() {
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
 <body class="">
@@ -104,15 +106,10 @@ function getResolvedTickets() {
     </div>
 
     <!-- Footer -->
-    <footer class="footer mt-5">
+    <footer class="footer mt-5 float-sm-start float-md-none position-sm-sticky position-md-none">
         <div class="container">
             <p>&copy; 2023 Ticketing Support. All rights reserved.</p>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+
         </div>
     </footer>
 

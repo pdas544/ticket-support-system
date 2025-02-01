@@ -4,5 +4,9 @@
         "ext-gd": "*",
         "ext-zip": "*",
         "phpoffice/phpspreadsheet": "^3.6"
+    },
+    "autoload": {
+        "classmap": [
+            "app/controller"]
     }
 }

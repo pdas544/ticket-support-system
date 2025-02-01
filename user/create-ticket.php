@@ -1,18 +1,30 @@
 <?php
-session_start();
+// session_start();
+require_once '../includes/initialize.php';
+
+require_once CONTROLLER_PATH.DS.'ticket.php';
+
+require_once SITE_ROOT."\\db.php";
 
 if(!isset($_SESSION['user_name'])){
-   header("Location: ../login-user.php");
-   exit();
+    header("Location: ../login-user.php");
+    exit();
+ }
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $department = htmlspecialchars($_POST['department']);
+    $location = htmlspecialchars($_POST['location']);
+    $subject = htmlspecialchars($_POST['subject']);
+    $description = htmlspecialchars($_POST['description']);
+    $ticket = new Ticket($db);
+    if($ticket->insertTicket($_SESSION['user_id'],$department,$location,$subject,$description)==true){
+        header("Location: user-dashboard.php?createTicket=true");
+        exit();
+    }else{
+        header("Location: user-dashboard.php?createTicket=false");
+        exit();
+    }
 }
-
-require_once '../db.php';
-
-$stmt = $db->prepare("SELECT * FROM tickets WHERE user_id = ?");
-$stmt->bind_param("i", $_SESSION['user_id']);
-$stmt->execute();
-$result = $stmt->get_result();
-
 
 ?>
 <!DOCTYPE html>
@@ -60,20 +72,10 @@ $result = $stmt->get_result();
     <div class="container mt-5">
         <div class="login-container">
             <h2 class="text-center">Raise Ticket</h2>
-            <form action="controller/ticket.php" method="post">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required
-                        placeholder="Enter your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required
-                        placeholder="Enter your official email id">
-                </div>
+            <form action="create-ticket.php" method="post">
                 <div class="form-group">
                     <label for="department">Department</label>
-                    <select name="" id="" class="form-select" aria-label="Default select example">
+                    <select name="department" id="" class="form-select" aria-label="Default select example">
                         <option value="" selected disabled>--Select Department--</option>
                         <option value="fc">Fashion Communication</option>
                         <option value="ft">Fashion Technology</option>
@@ -101,10 +103,34 @@ $result = $stmt->get_result();
                     <textarea class="form-control" id="description" name="description" rows="3" required
                         placeholder="Enter brief description"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="w-25 mx-auto">
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </div>
             </form>
         </div>
     </div>
+
+    <!-- Message Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="messageText"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

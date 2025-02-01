@@ -6,5 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Auth' => $baseDir . '/app/controller/amc-login.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Ticket' => $baseDir . '/app/controller/ticket.php',
+    'User' => $baseDir . '/app/controller/user.php',
 );

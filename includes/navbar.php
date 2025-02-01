@@ -14,7 +14,7 @@
                         Guest
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="raise-ticket.php">Raise Ticket</a></li>
+                        <li><a class="dropdown-item" href="raise-ticket.php?guest=true">Raise Ticket</a></li>
                         <li><a class="dropdown-item" href="view-status.php">View Ticket Status</a></li>
                     </ul>
                 </li>
