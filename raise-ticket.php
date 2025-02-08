@@ -1,7 +1,7 @@
 <?php
 
 
-require_once '../ticket/includes/initialize.php';
+require_once '../ticketold/includes/initialize.php';
 
 // die(SITE_ROOT);
 
@@ -57,7 +57,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     <!-- Main Content -->
     <div class="container-fluid">
-        <div class="raise-ticket-container">
+        <div class="raise-ticket-container d-flex flex-column justify-content-center">
             <h2 class="mb-4 text-center">Raise Ticket</h2>
             <form action="#" method="post" class="needs-validation" novalidate>
                 <div class="form-group">
@@ -90,7 +90,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         Please provide the description.
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-2 mx-auto">Submit</button>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </div>
             </form>
         </div>
     </div>
@@ -117,17 +119,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     </div>
 
     <!-- Footer -->
-    <footer class="footer mt-5">
-        <div class="container">
-            <p>&copy; 2023 Ticketing Support. All rights reserved.</p>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-    </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

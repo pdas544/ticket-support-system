@@ -95,7 +95,7 @@ $totalTickets = $totalTicketsRow['total'];
     </div>
 
     <!-- Footer -->
-    <footer class="footer mt-5">
+    <!-- <footer class="footer mt-5">
         <div class="container">
             <p>&copy; 2023 Ticketing Support. All rights reserved.</p>
             <div class="social-icons">
@@ -105,7 +105,7 @@ $totalTickets = $totalTicketsRow['total'];
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

@@ -106,12 +106,13 @@ function getResolvedTickets() {
     </div>
 
     <!-- Footer -->
-    <footer class="footer mt-5 float-sm-start float-md-none position-sm-sticky position-md-none">
+    <!-- <footer class="footer mt-5 start-0 end-0 bottom-0 position-absolute">
         <div class="container">
-            <p>&copy; 2023 Ticketing Support. All rights reserved.</p>
+            <p>&copy; 2025 Ticketing Support. All rights reserved. Developed By <a
+                    href="mailto:it.bhubaneswar@nift.ac.in">Priyabrata Das</a></p>
 
         </div>
-    </footer>
+    </footer> -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

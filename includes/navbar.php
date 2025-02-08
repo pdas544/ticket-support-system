@@ -24,9 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="register-user.php">Register</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="amc-login.php">AMC Login</a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

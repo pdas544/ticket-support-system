@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ticket_number'])) {
                     </div>
                     <div class="modal-body" id="modalMessage">
                         <?php if (!empty($message)): ?>
-                        <div><?php echo $message; ?></div>
+                        <div class="text-center"><?php echo $message; ?></div>
                         <?php endif; ?>
                         <?php if (!empty($ticketDetails)): ?>
                         <table class="table table-bordered">

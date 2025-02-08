@@ -1,9 +1,9 @@
 <?php
 session_start();
 $_SESSION['table']="users";
-if(isset($_GET['amc-login'])){
+if(isset($_GET['amc'])){
   // die($_GET['amc-login']);
-  $table = $_GET['amc-login']=='true'?'agents':'users';
+  $table = $_GET['amc']=='true'?'agents':'users';
   $_SESSION['table'] = $table;
 }
 
@@ -73,17 +73,7 @@ if(isset($_GET['amc-login'])){
   </div>
 
   <!-- Footer -->
-  <footer class="footer mt-5 position-absolute start-0 end-0">
-    <div class="container">
-      <p>&copy; 2023 Ticketing Support. All rights reserved.</p>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </div>
-  </footer>
+
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

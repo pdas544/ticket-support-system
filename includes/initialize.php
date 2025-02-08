@@ -9,7 +9,7 @@
 
 	// include_once('../'.$str.'app'.$str.'controller'.$str.'ticket.php');
 
-	defined('SITE_ROOT') ? null : define('SITE_ROOT','C:'.DS.'xampp'.DS.'htdocs'.DS.'ticket');
+	defined('SITE_ROOT') ? null : define('SITE_ROOT','C:'.DS.'xampp'.DS.'htdocs'.DS.'ticketold');
 
 	
 	//defined('SITE_ROOT') ? null :  define('SITE_ROOT',DS.'home'.DS.'silcharp'.DS.'public_html');

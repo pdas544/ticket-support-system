@@ -36,8 +36,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    .captcha {
+    /* .captcha {
       font-size: 24px;
       font-weight: bold;
       padding: 10px;
@@ -45,6 +48,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       border-radius: 5px;
       margin-bottom: 10px;
       display: inline-block;
+    } */
+
+    .captcha-container {
+      /* margin: 20px; */
+      /* padding: 10px; */
+      /* background: #f0f0f0; */
+      /* display: inline-block; */
+    }
+
+    #captchaImage {
+      border: 1px solid #ccc;
+      /*margin: 10px 0; */
+    }
+
+    .refresh-btn {
+      /* display: inline-block;
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline; */
+      cursor: pointer;
     }
   </style>
 
@@ -60,14 +83,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
       <form action="register-user.php" method="post" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" name="name" required />
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" required />
           <div class="invalid-feedback">Please provide your name.</div>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" required />
+          <input type="email" class="form-control" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@nift\.ac\.in$"
+            placeholder="Use NIFT Email ID" required />
           <div class="invalid-feedback">
-            Please provide a valid email address.
+            Please provide a valid NIFT Email ID.
           </div>
         </div>
         <div class="form-group">
@@ -83,10 +107,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="password" class="form-control" id="confirm_password" name="confirm_password" required />
           <div class="invalid-feedback">Please confirm your password.</div>
         </div>
-        <div class="form-group mt-2">
-          <label for="captcha">Captcha</label>
-          <div class="captcha" id="captcha">Loading...</div>
-          <input type="text" class="form-control" id="captcha_input" name="captcha_input" required />
+        <div class="form-group captcha-container d-flex flex-column">
+          <div class="d-inline-flex mt-3 mb-3 justify-content-center gap-2">
+            <!-- <label for="captcha">Captcha</label> -->
+            <canvas class="" id="captchaImage" width="200" height="60"></canvas>
+
+            <div class="fs-3 align-self-center refresh-btn" id="captcha" onclick="generateImageCaptcha()"><i
+                class="fa fa-refresh" aria-hidden="true"></i></div>
+          </div>
+          <input type="text" class="form-control" id="captchaInput" placeholder="Enter CAPTCHA" required />
           <div class="invalid-feedback">
             Please enter the correct captcha.
           </div>
@@ -98,6 +127,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </form>
     </div>
+  </div>
   </div>
 
   <!-- Message Modal -->
@@ -122,19 +152,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
 
-
-  <!-- Footer -->
-  <footer class="footer mt-5">
-    <div class="container">
-      <p>&copy; 2023 Ticketing Support. All rights reserved.</p>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </div>
-  </footer>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -180,31 +197,96 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     })();
 
     // Generate random captcha
+    let currentCaptcha = '';
+
     function generateCaptcha() {
-      var chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      var captcha = "";
-      for (var i = 0; i < 6; i++) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let captcha = '';
+      for (let i = 0; i < 6; i++) {
         captcha += chars.charAt(Math.floor(Math.random() * chars.length));
       }
       return captcha;
     }
-    //Set captcha on page load 
-    document.getElementById("captcha").innerText = generateCaptcha();
+
+    function generateImageCaptcha() {
+      const canvas = document.getElementById('captchaImage');
+      const ctx = canvas.getContext('2d');
+
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Generate new CAPTCHA
+      currentCaptcha = generateCaptcha();
+
+      // Add background noise
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Add random lines
+      for (let i = 0; i < 5; i++) {
+        ctx.strokeStyle = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
+        ctx.beginPath();
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.stroke();
+      }
+
+      // Draw CAPTCHA text
+      ctx.font = '30px Arial';
+      ctx.fillStyle = '#000000';
+      for (let i = 0; i < currentCaptcha.length; i++) {
+        ctx.save();
+        ctx.translate(30 + i * 25, 40);
+        ctx.rotate((Math.random() - 0.5) * 0.4);
+        ctx.fillText(currentCaptcha[i], 0, 0);
+        ctx.restore();
+      }
+
+      // Add random dots
+      for (let i = 0; i < 50; i++) {
+        ctx.fillStyle = `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.5)`;
+        ctx.beginPath();
+        ctx.arc(
+          Math.random() * canvas.width,
+          Math.random() * canvas.height,
+          Math.random() * 2,
+          0,
+          2 * Math.PI
+        );
+        ctx.fill();
+      }
+    }
+
+    function validateCaptcha() {
+      const userInput = document.getElementById('captchaInput').value;
+
+      if (userInput === currentCaptcha) {
+        return true;
+      } else {
+
+        generateImageCaptcha();
+        document.getElementById('captchaInput').value = '';
+
+      }
+      return false;
+    }
+
+    // Generate initial CAPTCHA on page load
+    generateImageCaptcha();
+
     // Validate form before submission 
     document.querySelector("form").addEventListener("submit", function (event) {
       var
         password = document.getElementById("password").value;
       var
         confirmPassword = document.getElementById("confirm_password").value;
-      var
-        captchaInput = document.getElementById("captcha_input").value;
+      // var captchaInput = document.getElementById("captchaInput").value;
       var
         captcha = document.getElementById("captcha").innerText;
       if (password !== confirmPassword) {
         event.preventDefault();
         alert("Password and Confirm Password do not match.");
-      } else if (captchaInput !== captcha) {
+      } else if (validateCaptcha() == false) {
         event.preventDefault();
         alert("Captcha does not match.");
       } else if (!validatePassword(password)) {
