@@ -32,18 +32,18 @@
   <li>Modify Line: 12 in the config file in includes/initialize.php 
     <pre><code>defined('SITE_ROOT') ? null : define('SITE_ROOT','C:'.DS.'xampp'.DS.'htdocs'.DS.'ticket-support-system');</code></pre>
   </li>
-  <li>Install dependencies:
+  <li>Modify the Line:2 in the file db.php DB_USER: mysql user, DB_PASSWORD: mysql_password
     <pre><code>$db = new mysqli("localhost", "DB_USER", "DB_PASSWORD", "ticketing_support");</code></pre>
   </li>
-  <li>Create Database and tables in MySQL using MySQL CLI or PHPMyadmin
-    <pre><code>DB NAME: ticketing_support</code></pre>
+  <li>
+    Import the <strong>ticketing_support.sql</strong> in MySQL using MySQL CLI or PHPMyadmin for dummy data.
   </li>
 </ol>
 
 <h2 style="color:#FF4500;">Usage</h2>
 <ol>
-  <li>Access the LMS dashboard at <code>http://localhost:8000</code>.</li>
-  <li>Create an account or log in as an admin to manage courses and users.</li>
-  <li>Explore the learning modules and track progress.</li>
+  <li>Start the apache and mysql service (in XAMPP)<code>http://localhost:8000/ticket-support-system</code> </li>
+  <li>Homepage displays all the Ticket Stats.</li>
+  <li>Use the Navigation Menu Items for necessary actions.</li>
 </ol>
 
