@@ -33,8 +33,11 @@
   <li><strong>Modify Line: 12</strong> in the config file in includes/initialize.php 
     <pre><code>defined('SITE_ROOT') ? null : define('SITE_ROOT','C:'.DS.'xampp'.DS.'htdocs'.DS.'ticket-support-system');</code></pre>
   </li>
-  <li><strong>Modify the Line:2</strong>  in the file db.php (parent folder) DB_USER: mysql user, DB_PASSWORD: mysql_password
+  <li><strong>Modify the Line:2</strong>  in the file db.php (parent folder), replace DB_USER, DB_PASSWORD with your own user and password
     <pre><code>$db = new mysqli("localhost", "DB_USER", "DB_PASSWORD", "ticketing_support");</code></pre>
+  </li>
+   <li>
+    Create a new database namely ticketing_support using MySQL CLI or PHPMyadmin.
   </li>
   <li>
     Import the <strong>ticketing_support.sql</strong> in MySQL using MySQL CLI or PHPMyadmin for dummy data.
