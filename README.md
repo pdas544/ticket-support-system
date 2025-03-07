@@ -18,7 +18,8 @@
 2) Single Front Controller (Entry Point of the Application)
 3) JWT Authentication using **Sanctum** Library
 4) RESTful API
-5) Routing
+5) Routing using **AltoRouter** Library.
+6) Reusing layouts using **Plates** Templating Engine.
 ## 
 **How to use this repo:**
 <ol>
@@ -29,10 +30,10 @@
   <li>Clone the repository:
     <pre><code>git clone https://github.com/pdas544/ticket-support-system.git</code></pre>
   </li>
-  <li>Modify Line: 12 in the config file in includes/initialize.php 
+  <li><strong>Modify Line: 12</strong> in the config file in includes/initialize.php 
     <pre><code>defined('SITE_ROOT') ? null : define('SITE_ROOT','C:'.DS.'xampp'.DS.'htdocs'.DS.'ticket-support-system');</code></pre>
   </li>
-  <li>Modify the Line:2 in the file db.php DB_USER: mysql user, DB_PASSWORD: mysql_password
+  <li><strong>Modify the Line:2</strong>  in the file db.php (parent folder) DB_USER: mysql user, DB_PASSWORD: mysql_password
     <pre><code>$db = new mysqli("localhost", "DB_USER", "DB_PASSWORD", "ticketing_support");</code></pre>
   </li>
   <li>
